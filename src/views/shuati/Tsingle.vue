@@ -39,33 +39,32 @@
   </div>
 </template>
 <script>
-import { findSingle } from '../../api/tSingle'
+import { findSingle } from '@/api/tSingle'
 
 export default {
   components: {},
   props: [],
   data () {
     const validateNumber = (rule, value, callback) => {
-      let numberReg = /^\d+$|^\d+[.]?\d+$/
+      const numberReg = /^\d+$|^\d+[.]?\d+$/
       if (value !== '') {
         if (!numberReg.test(value)) {
           callback(new Error('请输入数字'))
-        } else {
-          if(value == 0)
+          // eslint-disable-next-line eqeqeq
+        } else if (value == 0) {
           callback(new Error('请输入大于0的数字'))
-          else {
-            callback()
-          }
+        } else {
+          callback()
         }
       } else {
         callback(new Error('请输入值'))
       }
     }
     return {
-      title: 'hahah',
+      title: '题目',
       formData: {
         startNum: undefined,
-        field105: undefined,
+        field105: undefined
       },
       rules: {
         startNum: [{
@@ -76,8 +75,8 @@ export default {
           required: true,
           message: '请输入刷题数',
           trigger: 'blur'
-        }],
-      },
+        }]
+      }
     }
   },
   computed: {},
@@ -88,19 +87,19 @@ export default {
   },
   methods: {
     submitForm () {
-      this.$refs['elForm'].validate(valid => {
+      this.$refs.elForm.validate(valid => {
         if (!valid) return
         this.getSingle()
       })
     },
-    async getSingle(){
-       const {data} = await findSingle(this.startNum)
+    getSingle: async function () {
+      const { data } = await findSingle(this.formData.startNum)
       this.title = data.data.tSingle.topic
-      console.info(data);
+      console.info(data)
     },
     resetForm () {
-      this.$refs['elForm'].resetFields()
-    },
+      this.$refs.elForm.resetFields()
+    }
   }
 }
 
@@ -132,4 +131,3 @@ export default {
   width:450px;
 }
 </style>
-

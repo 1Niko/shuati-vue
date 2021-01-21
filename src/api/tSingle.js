@@ -2,13 +2,11 @@ import request from '../utils/request'
 /**
  * 后面的每次请求都是需要携带token的
  */
-export const findSingle= (startNum,single) => {
+export const findSingle = (startNum, single) => {
+  const base = '/t-single/'
   return request({
-    url: "/t-single/getSingle",
+    url: `${base}${startNum}`,
     method: 'get',
-    params: {
-      startNum
-    },
     data: single
   })
 }
