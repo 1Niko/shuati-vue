@@ -17,9 +17,13 @@ const routes = [
     path: '/main',
     name: 'Main',
     component: () => import('@/views/Main.vue'),
-    childrens:{
-
+    children:[
+      {
+      path: '/single',
+      name: 'Single',
+      component: () => import('@/views/shuati/Tsingle.vue'),
     }
+    ]
   }
 ]
 
