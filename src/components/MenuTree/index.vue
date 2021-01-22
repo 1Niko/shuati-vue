@@ -28,13 +28,13 @@ export default {
   name: 'MenuTree',
   props: ['menuList'],
   methods: {
-    //保存激活路径
+    // 保存激活路径
     savePath (path) {
       window.sessionStorage.setItem('activePath', path)
       console.log(path)
-      //调用Main.vue的activePath
+      // 调用Main.vue的activePath
       this.activePath = path
-    },
+    }
   }
 }
 </script>
