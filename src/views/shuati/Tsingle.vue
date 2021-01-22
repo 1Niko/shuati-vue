@@ -5,13 +5,13 @@
       <el-row>
         <el-col :span="6">
           <el-form-item label="开始题号" prop="startNum">
-            <el-input v-model="formData.startNum" placeholder="请输入开始题号" clearable :style="{width: '100%'}">
+            <el-input v-model.number="formData.startNum" placeholder="请输入开始题号" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="刷题数" prop="tCount">
-            <el-input v-model="formData.tCount" placeholder="请输入刷题数" clearable :style="{width: '100%'}">
+            <el-input v-model.number="formData.tCount" placeholder="请输入刷题数" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
@@ -76,7 +76,7 @@ export default {
       if (value !== '') {
         if (!numberReg.test(value)) {
           callback(new Error('请输入数字'))
-        } else if (value.isEqual(0)) {
+        } else if (value === 0) {
           callback(new Error('请输入大于0的数字'))
         } else {
           callback()
