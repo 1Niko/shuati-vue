@@ -76,7 +76,7 @@ export default {
       if (value !== '') {
         if (!numberReg.test(value)) {
           callback(new Error('请输入数字'))
-        } else if (value == 0) {
+        } else if (value.isEqual(0)) {
           callback(new Error('请输入大于0的数字'))
         } else {
           callback()
@@ -90,7 +90,7 @@ export default {
       id: 0, // 题号 题库里的第几题
       index: 0, // 题序 本次练习答题第几题
       countIndex: 0, // 当前题答题次数
-      countRight: 0, //答对次数
+      countRight: 0, // 答对次数
       countError: 0, // 答错次数
       title: '暂无数据', // 题中内容
       answerA: '暂无数据1', // A答案
@@ -128,9 +128,9 @@ export default {
   },
   methods: {
     // 提交答案
-    commit(){
-      if(this.myAnswer === this.correctAnswer ){
-        if(this.countIndex === 0 ){
+    commit () {
+      if (this.myAnswer === this.correctAnswer) {
+        if (this.countIndex === 0) {
           this.countRight++ // 答对次数
         }
         this.$message({
@@ -139,21 +139,21 @@ export default {
           center: true
         })
         // 判断是否练习完成
-        if(this.index < this.formData.tCount){
+        if (this.index < this.formData.tCount) {
           this.id++ // 下一题
-          this.index++ //本次练习的序号+1
+          this.index++ // 本次练习的序号+1
           this.getSingle()
-        }else {
+        } else {
           this.$notify({
             title: '成功',
             message: '恭喜你，练习完成',
             type: 'success'
           })
-          this.disabled = true; // 练习完成后提交按钮不可用
+          this.disabled = true // 练习完成后提交按钮不可用
         }
-        this.countIndex = 0 //归0
-      }else {
-        if(this.countIndex === 0 ){
+        this.countIndex = 0 // 归0
+      } else {
+        if (this.countIndex === 0) {
           this.countError++ // 答错次数
         }
         this.$message({
@@ -161,7 +161,7 @@ export default {
           type: 'error',
           center: true
         })
-        this.countIndex++ //当前题答题次数
+        this.countIndex++ // 当前题答题次数
       }
     },
     // 提交开始题号和训练总数
@@ -169,21 +169,21 @@ export default {
       this.$refs.elForm.validate(valid => {
         if (!valid) return
         this.id = this.formData.startNum
-        this.index = 1;
-        this.countError = 0;
-        this.countRight = 0;
+        this.index = 1
+        this.countError = 0
+        this.countRight = 0
         this.getSingle()
       })
-      this.disabled = false;
+      this.disabled = false
     },
     // 获取单选题
     getSingle: async function () {
       const { data } = await findSingle(this.id)
       this.title = data.data.tSingle.topic
       this.id = data.data.tSingle.id
-      const arr = [data.data.tSingle.answera,data.data.tSingle.answerb,data.data.tSingle.answerc,data.data.tSingle.answerd]
+      const arr = [data.data.tSingle.answera, data.data.tSingle.answerb, data.data.tSingle.answerc, data.data.tSingle.answerd]
       // 随机数组 进行回显选项 避免每次题目选项位置一样
-      arr.sort(function (){
+      arr.sort(function () {
         return 0.5 - Math.random()
       })
       this.answerA = arr[0]
@@ -201,7 +201,6 @@ export default {
 
 </script>
 <style lang="less">
-
 
 .box-bg {
   display: flex;
