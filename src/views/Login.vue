@@ -8,17 +8,20 @@
         <img src="../assets/img/索隆.gif">
       </div>
       <!--表单-->
-      <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginForm"  class="login_form">
-        <el-form-item  prop="username">
-          <el-input type="text" prefix-icon="el-icon-user-solid" v-model="loginForm.username" autocomplete="on" placeholder="用户名"></el-input>
+      <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginForm" class="login_form">
+        <el-form-item prop="username">
+          <el-input type="text" prefix-icon="el-icon-user-solid" v-model="loginForm.username" autocomplete="on"
+                    placeholder="用户名"></el-input>
         </el-form-item>
-        <el-form-item  prop="password">
-          <el-input type="password" prefix-icon="el-icon-lock" v-model="loginForm.password" autocomplete="off" placeholder="密码"></el-input>
+        <el-form-item prop="password">
+          <el-input type="password" prefix-icon="el-icon-lock" v-model="loginForm.password" autocomplete="off"
+                    placeholder="密码"></el-input>
         </el-form-item>
-        <el-form-item  prop="verifyCode">
+        <el-form-item prop="verifyCode">
           <div class="verify_box">
-            <el-input type="text" prefix-icon="el-icon-mobile" v-model="loginForm.verifyCode" autocomplete="off" placeholder="验证码" class="verify_code"></el-input>
-            <img src="https://s2.ax1x.com/2019/08/23/msFXK1.gif" alt="验证码" class="verify_img">
+            <el-input type="text" prefix-icon="el-icon-mobile" v-model="loginForm.verifyCode" autocomplete="off"
+                      placeholder="验证码" class="verify_code"></el-input>
+            <img :src="captcha" alt="验证码" class="verify_img">
           </div>
         </el-form-item>
         <el-form-item class="login_btn">
@@ -31,13 +34,15 @@
 </template>
 
 <script>
+import { getCaptcha } from '@/api/captcha'
+
 export default {
   name: 'Login',
-  data() {
+  data () {
     let validateName = (rule, value, callback) => {
-      if (value==='') {
+      if (value === '') {
         return callback(new Error('用户名不能为空'))
-      }else {
+      } else {
         callback()
       }
     }
@@ -48,7 +53,7 @@ export default {
         callback()
       }
     }
-    let validateVerifyCode= (rule, value, callback) => {
+    let validateVerifyCode = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入验证码'))
       } else {
@@ -56,6 +61,7 @@ export default {
       }
     }
     return {
+      captcha: '',
       loginForm: {
         username: '',
         password: '',
@@ -63,30 +69,48 @@ export default {
       },
       loginRules: {
         username: [
-          { validator: validateName, trigger: 'blur' }
+          {
+            validator: validateName,
+            trigger: 'blur'
+          }
         ],
         password: [
-          { validator: validatePass, trigger: 'blur' }
+          {
+            validator: validatePass,
+            trigger: 'blur'
+          }
         ],
         verifyCode: [
-          { validator: validateVerifyCode, trigger: 'blur' }
+          {
+            validator: validateVerifyCode,
+            trigger: 'blur'
+          }
         ]
       }
-    };
+    }
+  },
+  mounted () {
+    this.findCaptcha()
   },
   methods: {
-    submitForm(Form) {
+    findCaptcha: async function () {
+      const { data } = await getCaptcha()
+      this.captcha = data.data.image
+      console.info(data.data.key)
+    },
+
+    submitForm (Form) {
       this.$refs[Form].validate((valid) => {
         if (valid) {
           this.$router.push('Main')
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
-    resetForm(Form) {
-      this.$refs[Form].resetFields();
+    resetForm (Form) {
+      this.$refs[Form].resetFields()
     }
   }
 }
@@ -126,25 +150,27 @@ export default {
     }
   }
 
-  .login_form{
+  .login_form {
     position: absolute;
     bottom: 0px;
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
 
-    .login_btn{
+    .login_btn {
       display: flex;
       justify-content: flex-end;
     }
 
-    .verify_box{
+    .verify_box {
       display: flex;
-      .verify_code{
+
+      .verify_code {
         width: 60%;
         justify-content: left;
       }
-      .verify_img{
+
+      .verify_img {
         height: 45px;
         width: 40%;
         justify-content: flex-end;

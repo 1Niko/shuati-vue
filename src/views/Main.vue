@@ -49,7 +49,7 @@ export default {
       activePath: '',
       isCollapse: false,
       opened: true,
-      isOpened: false,
+      isOpened: true,
       menuList: [
         {
           id: 1,
