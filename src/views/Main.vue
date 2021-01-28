@@ -70,9 +70,10 @@ export default {
               url: '/welcome',
               icon: 'el-icon-star-off',
               orderNum: 1,
-              open: 0,
+              open: 1,
               disabled: false,
-              perms: 'welcome:view',
+              perms: 'map:view',
+              // perms: 'welcome:view',
               type: 0,
               children: []
             },
@@ -155,6 +156,7 @@ export default {
               type: 0,
               children: []
             },
+
             {
               id: 304,
               parentId: 303,
@@ -162,9 +164,9 @@ export default {
               url: '/health',
               icon: 'el-icon-s-cooperation',
               orderNum: 1,
-              open: 0,
+              open: 1,
               disabled: false,
-              perms: '',
+              perms: 'map:view',
               type: 0,
               children: []
             },
@@ -172,12 +174,12 @@ export default {
               id: 305,
               parentId: 303,
               menuName: '判断题',
-              url: null,
+              url: '/judgement',
               icon: 'el-icon-c-scale-to-original',
               orderNum: 2,
               open: 1,
               disabled: false,
-              perms: null,
+              perms: 'map:view',
               type: 0,
               children: []
             },

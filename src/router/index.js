@@ -13,6 +13,8 @@ const routes = [
     name: 'Login',
     component: () => import('@/views/Login.vue')
   },
+
+
   {
     path: '/main',
     name: 'Main',
@@ -22,7 +24,18 @@ const routes = [
       path: '/single',
       name: 'Single',
       component: () => import('@/views/shuati/Tsingle.vue'),
-    }
+    },
+      //写在main的children下面应用main中的样式 （Hamburger 和 MenuTree ）
+      {
+        path:'/welcome',
+        name:'Welcome',
+        component:() =>import('@/views/Welcome.vue')
+      },
+      {
+        path:'/judgement',
+        name:'Judgement',
+        component:() => import('@/views/shuati/Tjudgement.vue'),
+      }
     ]
   }
 ]

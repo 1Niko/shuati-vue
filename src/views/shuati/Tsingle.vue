@@ -35,13 +35,14 @@
             </div>
           </el-card>
           <el-card class="box-card">
-            <div slot="header" >
+            <div slot="header" class="">
               <div class="topic" >
                 <div class="tips">
                   <span style="font-family: 华文行楷,serif;font-size: x-large">现在答题第 <span style="color: darkcyan">{{index}}</span> 题，在题库中第 <span style="color: darkcyan">{{id}}</span> 题</span>
                 </div>
                 {{title}}
               </div>
+
             </div>
             <div class="answer-box">
               <div class="answer">
@@ -133,6 +134,7 @@ export default {
         if (this.countIndex === 0) {
           this.countRight++ // 答对次数
         }
+        //alert提示信息
         this.$message({
           message: '恭喜你，答对了',
           type: 'success',
@@ -211,7 +213,9 @@ export default {
     justify-content: space-around;
   }
 }
-
+/*.header{*/
+  /*height: 200px;*/
+/*}*/
 .box-card {
   width: 500px;
 .tips{
