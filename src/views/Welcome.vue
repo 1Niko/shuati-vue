@@ -89,10 +89,10 @@
               const {data} = await findData(this.input1)
 
               //获取数据之后赋值
-              this.title = data.data.tSingle.topic
-              this.id = data.data.tSingle.id
+              this.title = data.data.tJudgement.topic
+              this.id = data.data.tJudgement.id
               //创建数组 接受数组
-              const arr = [data.data.tSingle.answera,data.data.tSingle.answerb,data.data.tSingle.answerb,data.data.tSingle.answerc,data.data.tSingle.answerd]
+              const arr = [data.data.tJudgement.answera,data.data.tJudgement.answerb,data.data.tJudgement.answerb,data.data.tJudgement.answerc,data.data.tJudgement.answerd]
               //把数组随机
               arr.sort(function () {
                 return 0.5 - Math.random()
