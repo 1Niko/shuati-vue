@@ -21,9 +21,23 @@
           </div>
 
 
-          <div class="answer"> <el-button ref="commit" type="primary" plain @click="commit()" :disabled="disabled">立即提交</el-button></div>
+          <div class="answer"> <el-button ref="commit" type="primary" plain @click="commit()" :disabled="disabled">立即提交</el-button>
+            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+              点我打开错题记录
+            </el-button>
+          </div>
+
         </div>
 
+        <el-drawer
+          title="错题记录"
+          :visible.sync="drawer"
+          :with-header="false">
+          <span>错题记录!</span>
+          <div class="answer">
+            <Wrongs></Wrongs>
+          </div>
+        </el-drawer>
       </el-card>
 
     </el-col>
@@ -33,11 +47,17 @@
 
 <script>
   import { findData } from '@/api/tJudgment'
+  import Wrongs from '../../components/Wrongs/wrongs'
   export default {
-    name: "Welcome",
+      name: "Tjudgment",
+       //新建错题组件
+    components:{
+      Wrongs
+    },
     data() {
       return {
-        input1: '',
+        count:0,
+        input1: 0,
         color:'red',
         alert1:false,
         title: '暂无数据', // 题中内容
@@ -49,7 +69,9 @@
         myAnswer: '', // 用户选择的答案
         disabled: false, // 提交按钮状态
         statusnow:0,
-        drawer: false
+        drawer: false,
+        //添加一个存储错题id的数组
+        wrongs:[]
       }
     },
     methods:{
@@ -61,23 +83,26 @@
         this.title = data.data.tJudgment.topic
         this.id = data.data.tJudgment.id
         this.correctAnswer = data.data.tJudgment.correctanswer
-
-        console.log(data.data.tJudgment)
       },
+
       commit:function () {
         if(this.myAnswer != ''){
           if(this.myAnswer === this.correctAnswer ){
-            this.$message.success("duile")
+            this.$message.success("回答正确")
             this.index ++
             this.input1 ++
             this.try_once()
           }else{
-            this.$message.warning("cuole")
+            this.$message.warning("回答错误")
+            //todo 记录回答错误的题号并标记 生成带有id的按钮，点击直接查看错误的题目 并且有正确答案
+            this.wrongs.push(this.input1)
+            console.log(this.wrongs)
           }
         }
 
       }
     }
+
   }
 </script>
 

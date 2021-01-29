@@ -12,7 +12,6 @@ Vue.prototype.$axios = axios
 Vue.use(Fragment.Plugin)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-
 new Vue({
   router,
   store,
