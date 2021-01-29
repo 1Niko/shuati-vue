@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import { findData } from '@/api/tJudgement'
+  import { findData } from '@/api/tJudgment'
     export default {
         name: "Welcome",
       data() {
@@ -89,10 +89,10 @@
               const {data} = await findData(this.input1)
 
               //获取数据之后赋值
-              this.title = data.data.tJudgement.topic
-              this.id = data.data.tJudgement.id
+              this.title = data.data.tJudgment.topic
+              this.id = data.data.tJudgment.id
               //创建数组 接受数组
-              const arr = [data.data.tJudgement.answera,data.data.tJudgement.answerb,data.data.tJudgement.answerb,data.data.tJudgement.answerc,data.data.tJudgement.answerd]
+              const arr = [data.data.tJudgment.answera,data.data.tJudgment.answerb,data.data.tJudgment.answerb,data.data.tJudgment.answerc,data.data.tJudgment.answerd]
               //把数组随机
               arr.sort(function () {
                 return 0.5 - Math.random()

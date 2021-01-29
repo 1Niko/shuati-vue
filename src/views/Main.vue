@@ -174,7 +174,7 @@ export default {
               id: 305,
               parentId: 303,
               menuName: '判断题',
-              url: '/judgement',
+              url: '/judgment',
               icon: 'el-icon-c-scale-to-original',
               orderNum: 2,
               open: 1,

@@ -32,9 +32,9 @@ const routes = [
         component:() =>import('@/views/Welcome.vue')
       },
       {
-        path:'/judgement',
-        name:'Judgement',
-        component:() => import('@/views/shuati/Tjudgement.vue'),
+        path:'/judgment',
+        name:'Judgment',
+        component:() => import('@/views/shuati/Tjudgment.vue'),
       }
     ]
   }

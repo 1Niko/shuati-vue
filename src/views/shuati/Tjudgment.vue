@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import { findData } from '@/api/tJudgement'
+  import { findData } from '@/api/tJudgment'
   export default {
     name: "Welcome",
     data() {
@@ -58,11 +58,11 @@
         //获取数据
         const {data} = await findData(this.input1)
         //获取数据之后赋值
-        this.title = data.data.tJudgement.topic
-        this.id = data.data.tJudgement.id
-        this.correctAnswer = data.data.tJudgement.correctanswer
+        this.title = data.data.tJudgment.topic
+        this.id = data.data.tJudgment.id
+        this.correctAnswer = data.data.tJudgment.correctanswer
 
-        console.log(data.data.tJudgement)
+        console.log(data.data.tJudgment)
       },
       commit:function () {
         if(this.myAnswer != ''){
