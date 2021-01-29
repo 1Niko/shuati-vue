@@ -35,8 +35,14 @@
           :with-header="false">
           <span>错题记录!</span>
           <div class="answer">
-            <Wrongs></Wrongs>
+            <!--<Wrongs></Wrongs>-->
           </div>
+          <div class="answer">
+            <el-button v-for="(item, index) in itemArr" :key="index" class="input" v-model="item.content">www</el-button>
+
+          </div>
+          <el-button @click="deleteEle()">删除</el-button>
+          <el-button @click="addEle">+添加元素</el-button>
         </el-drawer>
       </el-card>
 
@@ -71,7 +77,10 @@
         statusnow:0,
         drawer: false,
         //添加一个存储错题id的数组
-        wrongs:[]
+        wrongs:[],
+        itemArr: [{
+          content: ''
+        }]
       }
     },
     methods:{
@@ -84,7 +93,17 @@
         this.id = data.data.tJudgment.id
         this.correctAnswer = data.data.tJudgment.correctanswer
       },
-
+// 点击添加
+      addEle() {
+        this.itemArr.push({
+          content: ''
+        })
+      },
+// 删除一项
+      deleteEle(index) {
+        this.itemArr.splice(index, 1);
+      },
+      //提交答案
       commit:function () {
         if(this.myAnswer != ''){
           if(this.myAnswer === this.correctAnswer ){
@@ -107,8 +126,12 @@
 </script>
 
 <style lang="less">
+  .li{
+    height: 40px;
+    width: 58px;
+  }
   .input {
-    width: 200px;
+    width: 58px;
     border-radius: 4px;
   }
   .btn{
